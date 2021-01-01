@@ -33,7 +33,7 @@ It is time to emphasize that a Proxy is not just a wrapper/adapter/facade class,
 
 Additional nomenclature surrounding this pattern: SDK (an SDK to the outside developers), Monkey Patching or Object Augmentation pattern
 
-A related patter "The Decorator" is aka "Smart Proxy". It is used when you want to add functionality to an object, not by extending that object's type but at runtime (by supplying classes to it).
+A related pattern "The Decorator" is aka "Smart Proxy". It is used when you want to add functionality to an object, not by extending that object's type but at runtime (by supplying classes to it).
 
 Proxy is a very frequently used Design Pattern, thus I recommend you get to know it like the back of your hand. It's pretty easy as well so you have no excuse! Study the commented example (code in C++) - it's pretty easy, you'll agree with me. As a last note, don't be hesitant/afraid to use it. It does have a multitude of usecases including yours.
 
