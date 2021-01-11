@@ -14,9 +14,9 @@ class Program
 	:
 	public IProgram
 {
-	const std::wstring m_name;
+	const std::string m_name;
 public:
-	Program( const std::wstring& name )
+	Program( const std::string& name )
 		:
 		m_name( name )
 	{
@@ -34,10 +34,10 @@ public:
 
 	void execute() override
 	{
-		std::wcout << L"Executing program..." << L'\n';
+		std::cout << "Executing program..." << '\n';
 	}
 
-	std::wstring getName() const noexcept
+	std::string getName() const noexcept
 	{
 		return m_name;
 	}
@@ -63,9 +63,9 @@ public:
 
 	void execute()
 	{
-		std::wcout << L"Proxy executes the Program "
+		std::cout << "Proxy executes the Program "
 			<< m_program->getName()
-			<< L'\n';
+			<< '\n';
 	}
 
 	Program* getProgram() const noexcept
@@ -88,17 +88,17 @@ public:
 
 	void execute() const noexcept
 	{
-		std::wcout << L"Const Proxy executes the Program "
+		std::cout << "Const Proxy executes the Program "
 			<< m_proxy.getProgram()->getName()
-			<< L" promising not to modify it under any circumstances!"
-			<< L'\n';
+			<< " promising not to modify it under any circumstances!"
+			<< '\n';
 	}
 };
 
 
 int main()
 {
-	Program program{L"CCleaner"};
+	Program program{"CCleaner"};
 
 	ProxyProgram proxyProgram{std::move( program )};
 
