@@ -22,15 +22,22 @@ public:
 	{
 
 	}
+
 	~Program() noexcept = default;
+
 	Program( const Program& rhs )
 		:
 		m_name{rhs.m_name}
-	{}
+	{
+
+	}
+
 	Program( Program&& rhs ) noexcept
 		:
 		m_name{std::move( rhs.m_name )}
-	{}
+	{
+
+	}
 
 	void execute() override
 	{
@@ -46,11 +53,11 @@ public:
 // Proxy class
 class ProxyProgram
 {
-	std::unique_ptr<Program> m_program;
+	std::unique_ptr<Program> m_pProgram;
 public:
 	ProxyProgram( Program&& program )
 		:
-		m_program{std::make_unique<Program>( program ) }
+		m_pProgram{std::make_unique<Program>( program ) }
 	{
 
 	}
@@ -58,19 +65,21 @@ public:
 	ProxyProgram( const ProxyProgram& rhs ) = delete;
 	ProxyProgram( ProxyProgram&& rhs ) noexcept
 		:
-		m_program{ std::move( rhs.m_program ) }
-	{}
+		m_pProgram{std::move( rhs.m_pProgram )}
+	{
+
+	}
 
 	void execute()
 	{
 		std::cout << "Proxy executes the Program "
-			<< m_program->getName()
+			<< m_pProgram->getName()
 			<< '\n';
 	}
 
 	Program* getProgram() const noexcept
 	{
-		return m_program.get();
+		return m_pProgram.get();
 	}
 };
 
@@ -82,10 +91,11 @@ public:
 	ProxyProgramConst( ProxyProgram& pp )
 		:
 		m_proxy{std::move( pp )}
-	{}
+	{
+
+	}
 
 	// use only const functions to avoid modifying the Program (target object)
-
 	void execute() const noexcept
 	{
 		std::cout << "Const Proxy executes the Program "
@@ -113,6 +123,8 @@ int main()
 	ProxyProgramConst constProxy{proxyProgram};
 	constProxy.execute();
 	
-	std::system( "pause" );
-	return 0;
+#if defined _DEBUG && !defined NDEBUG
+	while ( !getchar() );
+#endif
+	return EXIT_SUCCESS;
 }
